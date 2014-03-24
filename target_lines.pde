@@ -1,23 +1,24 @@
 int ini_step = 2;
 int step=ini_step;
 
-boolean ref = true;
+boolean ref = false;
 boolean bez = true;
 
 void setup() {
   size(400, 400);
+  frameRate(2);
 }
 
 float sw = 1;
-
 int my_x = 0;
 int my_y = 0;
 
+int p = 0;
+
 void draw() {
   background(0);
-  
   boolean case1 = false;
-  boolean case2 = false;
+  boolean case2 = true;
    
   if (case1) {
     //vibrant lines case study
@@ -29,38 +30,32 @@ void draw() {
   }
   
   if (case2) {
-    for (int p = 0; p <= width; p++) {     
-      if (my_x == width) {
-        my_x = 0;
-      }
-      if (my_y == width) {
-        my_y = 0;
-      }
-      my_x = p;
-      my_y = p;
-   
-      curves(my_x, my_y, 30);
-    } 
+    p = p + 1;
+    if (p > width) {
+      p = (int) random(width);
+    }
+    my_x = (int) random(width/2 + width/10);
+    my_y = (int) random(height/3 + height/10);
   } else {
     my_x = width - mouseX;
     my_y = mouseY;
-    curves(my_x, my_y, 3);
   }
+  curves(my_x, my_y, 3);
 }
 
 void curves(int my_x, int my_y, int n) {
-  int yp = mouseY/6; //describe
+  int yp = my_y/6; //describe
   for (int i = 0; i <= width; i = i + width/n) {
     //reference lines    
     int x1 = i; //change i by 200
-    int y1 = mouseY; //change j by 100
+    int y1 = my_y; //change j by 100
     int x2 = my_x; //my_x
     int y2 = yp;
       
     int x1_ = my_x; //my_x
     int y1_ = height - yp;
     int x2_ = i;
-    int y2_ = height - mouseY; //change by 300
+    int y2_ = height - my_y; //change by 300
 
     boolean centerline = false;
     if (centerline) {
